@@ -1,0 +1,30 @@
+/* component/popup.wxss */
+.wx-popup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+}
+.popup-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  max-width: 600rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  box-sizing: bordre-box;
+  transform: translate(-50%, -50%); 
+  /* overflow: hidden; */
+  background: #fff;
+}
+.popup-container video {
+  width: 100%;
+}
+.icon-close {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+}

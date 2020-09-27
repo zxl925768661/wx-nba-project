@@ -1,0 +1,11 @@
+<!--pages/news_info/news_info.wxml-->
+<view class='news_info' wx:if="{{newsContent}}">
+    <view class='title'>
+        {{newsContent.title}}
+        <view class='pubtime'>{{newsContent.pubtime}}</view>
+    </view>
+    <import src="../wxParse/wxParse.wxml" />
+    <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+</view>

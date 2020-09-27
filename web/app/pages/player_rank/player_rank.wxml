@@ -1,0 +1,37 @@
+<!--pages/player_rank/player_rank.wxml-->
+<wxs module="util">
+  var toFix = function (value) {       
+    return parseFloat(value).toFixed(1)     
+  };
+  var getPGName = function (name) {       
+    return name.toLowerCase() + 'PG'     
+  };
+  module.exports = {
+    toFix: toFix,
+    getPGName: getPGName
+  };
+</wxs>
+<view wx:if="{{item.length!=0}}">
+  <view class="stats-nav">
+    <text wx:for="{{navs}}" wx:key="type" wx:for-item="item" data-type="{{item.type}}" class="{{current==item.type ? 'active' : ''}}" bindtap="tabNav">{{item.name}}</text>
+  </view>
+  <view class='table'>
+    <view class='header'>
+      <text class="player">球员</text>
+      <text class="team">球队</text>
+      <text class="data">场均得分</text>
+    </view>
+    <view class='tbody'>
+      <navigator wx:for="{{list}}" wx:for-item="item" wx:key="index" url="/pages/player_info/player_info?playerId={{item.playerId}}" class="{{index%2 == 0 ? '' : 'f5f5f5'}}">
+        <view class="player">
+          <text>{{index+1}}</text>
+          <image src="{{item.pic}}"></image>
+          <text>{{item.cnName}}</text>
+        </view>
+        <text class="team">{{item.teamName}}</text>
+        <text class="data">{{util.toFix(item[util.getPGName(current)])}}</text>
+      </navigator>
+
+    </view>
+  </view>
+</view>

@@ -1,0 +1,194 @@
+/* pages/player_info/player_info.wxss */
+.player-header {
+  justify-content: space-between;
+  background-color: #222225;
+  height: 88px;
+  align-items: center;
+  color: #b7b7b7;
+  padding: 0 20rpx;
+}
+.player-header text {
+  display: block;
+  font-size: 12px;
+}
+.player-header .player-name {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+.head-left image {
+  width: 55px;
+  height: auto;
+}
+.head-right image {
+  width: 35px;
+  height: 35px;
+}
+.head-right text {
+  text-align: center;
+}
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.swiper-tab-item {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 50%;
+  color: #777;
+}
+.active {
+  color: #1d8ff2;
+  border-bottom: solid 2rpx #1d8ff2;
+}
+.swiper-content-item {
+  display: none;
+}
+/*数据样式*/
+.data-content {
+  display: none;
+}
+.team-title {
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  padding-left: 20rpx;
+  color: #333;
+  width: 100%;
+  border-left: 3px solid #00aa98;
+  line-height: 55rpx;
+}
+.union-contrast .contrast-title{
+  text-align: center;
+}
+.contrast-title .strip {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-left: 12rpx;
+}
+.strip-name {
+  color: #999;
+  margin-left: 10rpx;
+}
+.union-contrast .player-strip {
+  background: #1d8ff2;
+}
+.union-contrast .avg-strip {
+  background: #d7d7d7;
+}
+.union-contrast .max-strip {
+  background: #f0f0f0;
+}
+.rects-line .max-strip{
+  height: 60px;
+}
+.rect-item {
+  width: 16%;
+  margin: 0 2%;
+}
+.rects-line {
+  position: relative;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.rects-line view {
+  width: 42%;
+  
+}
+.rects-line view view {
+  width: 100%;
+}
+.avg-box {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.rects-info text {
+  display: block;
+}
+.game-titles text, .game-item text{
+  width: 10.25%;
+  text-align: center;
+}
+.game-item text{
+  color: #999;
+}
+.game-titles text:nth-child(2), .game-item .vs-score {
+  width: 18%;
+  text-align: center;
+}
+.game-item .green {
+  color: #21be70;
+}
+.game-item .red {
+  color: #ec000b;
+}
+.game-shoot .game-titles text, .game-shoot .game-item text{
+  width: 16.66%;
+}
+/*资料样式*/
+.dataBox, .materialBox {
+  font-size: 28rpx;
+  color:#333;
+}
+.public-title {
+  width: 100%;
+  background-color: #eee;
+  
+  line-height: 60rpx;
+  padding-left: 20rpx;
+}
+.baseInfo {
+  justify-content: space-around;
+  font-size: 26rpx;
+  border-bottom: 1px dashed #999;
+  color: #333;
+  padding-bottom: 15rpx;
+}
+.baseInfo .info-item text{
+  display: block;
+  text-align: center;
+}
+.baseInfo .info-item text:first-child {
+  font-size: 28rpx;
+  padding: 15rpx 0;
+}
+.baseInfo .info-item text:first-child {
+  color: #999;
+}
+.players-cont {
+  font-size: 32rpx;
+  margin: 15rpx 20rpx 20rpx;
+}
+.career-item,  .honor-list view {
+  font-size: 32rpx;
+  color: #999;
+  margin: 15rpx 20rpx 20rpx;
+}
+.career-item-title {
+  display: inline-block;
+  width: 30%;
+}
+.items-list text, .honor-list text {
+  display: block;
+  color: #333;
+}
+
+.honor-title{
+  
+}
+.honor-list text:last-child {
+  color: #999;
+}
+.flex {
+  display: flex;
+}
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}

@@ -1,0 +1,63 @@
+<wxs module="util">
+  var areaMap = {
+    atlantic: '大西洋',
+    central: '中部',
+    east: '东部',
+    eastsouth: '东南',
+    pacific: '太平洋',
+    west: '西部',
+    westnorth: '西北',
+    westsouth: '西南'
+  }
+   var getAreaInfo = function(area) {
+    return areaMap[area];
+  }
+  var isObject = function(obj) {
+      return typeof obj === 'object'
+  }
+  module.exports = {
+    getAreaInfo: getAreaInfo,
+    isObject: isObject
+  }
+</wxs>
+<view>
+    <view class="swiper-tab">
+        <scroll-view class="scroll-view_x flex" scroll-x>
+        <block wx:for="{{rankMap}}" wx:for-item="list" wx:key="index">
+            <block wx:if="{{list && util.isObject(list)}}">
+                <view class="swiper-tab-item {{currentTab==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNav">{{util.getAreaInfo(index)}}赛区</view>
+            </block>
+        </block>
+        </scroll-view>
+    </view>
+    <view current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+        <block wx:for="{{rankMap}}" wx:for-item="list" wx:key="index">
+            <block wx:if="{{list && util.isObject(list)}}">
+                <view class="swiper-item  {{currentTab==index ? 'active' : ''}}">
+                    <view class='t-head  padding-lr-30' wx:if="{list}}">
+                        <text>球队</text>
+                        <text>胜场</text>
+                        <text>负场</text>
+                        <text>胜率</text>
+                        <text>场均差</text>
+                    </view>
+                    <view class='t-body'>
+                        <view class='team-item' wx:for="{{list}}" wx:for-item="item" wx:key="index1">
+                            <navigator url="/pages/team_info/team_info?teamId={{item.teamId}}&competitionId={{item.competitionId}}">
+                            <view>
+                            <text>{{index+1}}</text>
+                                <image src="{{item.logoNew}}"></image>
+                                <text>{{item.name}}</text>
+                            </view>
+                            <text>{{item.wins}}</text>
+                            <text>{{item.losses}}</text>
+                            <text>{{item['wining-percentage']}}%</text>
+                            <text>{{item['games-back'] }}</text>
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+</view>

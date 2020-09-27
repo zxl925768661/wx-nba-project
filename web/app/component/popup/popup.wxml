@@ -1,0 +1,7 @@
+<view class="wx-popup" hidden="{{flag}}" bindtap='_close' id="wx-popup">
+  <view class='popup-container'>
+    <video id="video" src="{{videoUrl}}" controls='true'></video>
+    <icon type="clear" class="icon-close" size="20" bindtap='_error'></icon>
+  </view>
+ 
+</view>

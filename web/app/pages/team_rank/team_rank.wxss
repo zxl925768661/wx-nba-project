@@ -1,0 +1,67 @@
+/* pages/team_rank/team_rank.wxss */
+.scroll-view_x {
+  width: auto;
+  overflow:hidden;
+}
+.swiper-box {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 100%;
+  float: left;
+}
+
+.swiper-item {
+  width: 100%;
+  height: 100%;
+  display: none;
+  box-sizing: border-box;
+}
+
+view.active {
+  display: block;
+}
+
+.t-head {
+  background: #f2f7fc;
+  font-size: 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #444
+}
+
+.t-head text,
+.t-body .team-item text {
+  width: 18%;
+  display: block;
+  float: left;
+  text-align: center;
+}
+
+.t-body .team-item {
+  font-size: 28rpx;
+  height: 65rpx;
+  line-height: 65rpx;
+  border-top: 1rpx solid #bebebe;
+  box-sizing: border-box;
+  /* padding: 0 30rpx; */
+}
+.team-item view{
+  display: inline-block;
+}
+.team-item view image {
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+}
+
+.t-body .team-item view,
+.t-head text:first-child {
+  width: 28%;
+  text-align: left;
+  float: left;
+}
+.t-body .team-item view text:last-child {
+  width: auto;
+}

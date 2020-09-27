@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<picker class="picker pl-20" mode="date" value="{{date}}" start="{{startDate}}" end="{{endDate}}" bindchange="bindDateChange">
+  <view class="picker-date ">
+    请选择日期: {{currentDate}}
+  </view>
+</picker>
+<view class="schedule-list">
+  <block wx:if="{{scheduleList}}">
+    <block wx:for="{{scheduleList}}" wx:for-item="list" wx:key="index">
+      <view class="shcedule-date pl-20">{{index}}</view>
+      <block wx:for="{{list}}" wx:for-item="item" wx:key="programId">
+        <navigator url="/pages/live_detail/live_detail?mid={{item.mid}}&competitionId={{competitionId}}">
+          <view class="schedule-item flex">
+            <view class="schedule-left">
+              <image src="{{item.leftBadge}}"></image>
+              <text>{{item.leftName}}</text>
+            </view>
+            <view class="schedule-content">
+              <text>{{item.matchDesc}}</text>
+              <text>{{item.startTime}}</text>
+              <text>{{item.leftGoal}}:{{item.rightGoal}}</text>
+              <text>回看 集锦</text>
+            </view>
+            <view class="schedule-right">
+              <image src="{{item.rightBadge}}"></image>
+              <text>{{item.rightName}}</text>
+            </view>
+          </view>
+        </navigator>
+      </block>
+      
+    </block>
+  </block>
+  <view wx:else class="no-data">无数据</view>
+</view>

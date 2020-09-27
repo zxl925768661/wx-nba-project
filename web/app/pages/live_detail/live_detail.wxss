@@ -1,0 +1,267 @@
+/* pages/live_detail/live_detail.wxss */
+.swiper-tab-item {
+  width: 25%;
+  box-sizing: border-box;
+}
+.scroll_box {
+  width: 100%;
+  overflow: hidden;
+  padding: 20rpx;
+  background: #fff;
+  white-space: nowrap;
+}
+.scroll-view_x {
+  width: auto;
+  overflow:hidden;
+}
+
+/*视频区域样式*/
+.video-container .video-item {
+  margin-right: 20rpx;
+}
+.video-container .video-item text{
+  position: absolute;
+  color: #fff;
+  font-size: 24rpx;
+  width: 100%;
+  padding: 10px;
+  word-break:break-all;
+  white-space: pre-line;
+  box-sizing: border-box;
+}
+.video-container .video-item image{
+  width: 160px;
+  height: 120px;
+}
+.video-container .scroll-view_x view{
+  display: inline-block;
+  position: relative;
+}
+.video-container .scroll-view_x .tvp_overlay_play {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 10px;
+  width: 76px;
+  height: 50px;
+  line-height: 50px;
+  margin: auto!important;
+  overflow: hidden;
+  font-size: 0;
+  text-align: center;
+  background: rgba(23,23,23,.6);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.video-container .scroll-view_x .tvp_button_play {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: 30px;
+  top: 14px;
+  margin: auto;
+  overflow: hidden;
+  vertical-align: middle;
+  border: 20px solid transparent;
+  border-width: 12px 21px;
+  border-left-color: #fff;
+}
+.news-detail {
+  flex: 1;
+  overflow: hidden;
+  padding-right: 10rpx;
+}
+.news-item {
+  padding: 20rpx 20rpx 20rpx 0;
+  border-bottom: 1rpx solid #ebf0f5;
+}
+.news-title {
+  font-size: 34rpx;
+}
+.news-info {
+  font-size: 28rpx;
+  color: #999;
+}
+.news-detail text {
+  display: block;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.swiper-item {
+  font-size: 28rpx;
+  color: #666;
+}
+.swiper-item .news-item image{
+  width: 115px;
+  height: 77px;
+}
+.swiper-item image {
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+  margin: 0 auto;
+}
+.public-title {
+  line-height: 55rpx;
+  font-size: 32rpx;
+  color: #666;
+  background-color: #ebf0f5;
+}
+.schedule-item {
+  padding: 10rpx 0;
+  color: #999;
+}
+.schedule-item > view {
+  width: 20%;
+}
+.schedule-item > view:nth-child(2) {
+  width: 60%;
+}
+.schedule-item image{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+}
+.schedule-item image, .schedule-item text {
+  display: block;
+  text-align: center;
+}
+.schedule-content text:nth-child(3) {
+  font-size: 36rpx;
+  color: #000;
+}
+.thead {
+  display: flex;
+}
+.thead text{
+  width: 15%;
+  text-align: center;
+}
+.thead text:nth-child(1){
+  width: 25%;
+  text-align: left;
+}
+.sec_scores {
+  flex: 1;
+}
+.team-image {
+  width: 25%;
+  line-height: 60rpx;
+}
+.team-image image {
+  margin: 0;
+}
+.one-quarter {
+  width: 20%;
+  text-align: center;
+}
+.one-quarter text{
+  display: block;
+  line-height: 60rpx;
+}
+.max-player {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.top-player-name {
+  width: 25%;
+}
+.top-player-name image, .comment-item image {
+  margin: 0;
+  width: 70rpx;
+  height: 70rpx;
+}
+.top-player-vs , .player-score-info{
+  flex: 1;
+  text-align: center;
+}
+.player-score-info {
+  line-height: 70rpx;
+}
+.player-score-info text {
+  font-size: 30rpx;
+  color: #000;
+}
+.flex-center {
+  align-items: center;
+}
+.player-nameInfo, .comment-userInfo {
+  flex-direction: column;
+}
+.right-side {
+  justify-content: flex-end;
+}
+.player-data-header {
+  width: 100%;
+}
+.player-data-header text , .player-data-item text{
+  width: 10%;
+  display: inline-block;
+}
+.player-data-header text:first-child, .player-data-item navigator{
+  width: 20%;
+}
+.player-data-item navigator, .player-data-item text {
+  display: inline-block;
+  line-height: 36rpx;
+}
+.f5f5f5, .f5f5f5 text{
+  background-color: #f5f5f5;
+}
+.teamer-name {
+  border-left: 3px solid #00aa98;
+  height: 55rpx;
+  line-height: 55rpx;
+  margin: 20rpx;
+  font-size: 32rpx;
+}
+.comment-item {
+  padding: 20rpx;
+}
+.comment-item image{
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.comment-userInfo text:nth-child(2){
+  font-size: 24rpx;
+  color: #999;
+}
+.comment-info {
+  padding-left: 50rpx;
+  border-bottom: 1rpx solid #ebf0f5;
+  padding: 10rpx 0 10rpx 70rpx;
+}
+.textlive-item {
+  font-size: 30rpx;
+  padding: 0 20px;
+}
+.textlive-time {
+  width: 36px;
+  margin-top: 20rpx;
+  position: relative;
+}
+.textlive-time::after {
+  position: absolute;
+  content: ' ';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: red;
+  right: -5rpx;
+  top: 18rpx;
+}
+.textlive-info {
+  padding: 20rpx;
+  border-left: 1rpx solid #e8e8e8;
+}
+.textlive-info .flex{
+  align-items: center;
+}
+.red {
+  color: red;
+}
