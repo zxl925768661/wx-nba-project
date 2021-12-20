@@ -1,0 +1,239 @@
+/* pages/team_info/team_info.wxss */
+.team-header {
+  background-color: #222225;
+  height: 88px;
+  align-items: center;
+  color: #b7b7b7;
+  padding: 0 20rpx;
+}
+.team-header image {
+  width: 80px;
+  height: 80px;
+}
+.team-header text {
+  display: block;
+  font-size: 12px;
+}
+.team-header .teamName {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+.head-left image {
+  width: 55px;
+  height: auto;
+}
+.head-right image {
+  width: 35px;
+  height: 35px;
+}
+.head-right text {
+  text-align: center;
+}
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.swiper-tab-item {
+  width: 25%;
+  box-sizing: border-box;
+}
+.active {
+  color: #1d8ff2;
+  border-bottom: solid 2rpx #1d8ff2;
+}
+.swiper-content-item {
+  display: none;
+}
+/*数据样式*/
+.data-content {
+  display: none;
+}
+.team-title {
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  padding-left: 20rpx;
+  color: #333;
+  width: 100%;
+  border-left: 3px solid #00aa98;
+  line-height: 55rpx;
+}
+.union-contrast .contrast-title{
+  text-align: center;
+}
+.contrast-title .strip {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-left: 12rpx;
+}
+.strip-name {
+  color: #999;
+  margin-left: 10rpx;
+}
+.union-contrast .team-strip {
+  background: #1d8ff2;
+}
+.union-contrast .avg-strip {
+  background: #d7d7d7;
+}
+.union-contrast .max-strip {
+  background: #f0f0f0;
+}
+.rects-line .max-strip{
+  height: 60px;
+}
+.rect-item {
+  width: 16%;
+  margin: 0 2%;
+}
+.rects-line {
+  position: relative;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.rects-line view {
+  width: 42%;
+  
+}
+.rects-line view view {
+  width: 100%;
+}
+.avg-box {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.rects-info text {
+  display: block;
+}
+.game-titles text, .game-item text{
+  width: 10.25%;
+  text-align: center;
+}
+.game-item text{
+  color: #999;
+}
+.game-titles text:nth-child(2), .game-item .vs-score {
+  width: 18%;
+  text-align: center;
+}
+.game-item .green {
+  color: #21be70;
+}
+.game-item .red {
+  color: #ec000b;
+}
+.game-shoot .game-titles text, .game-shoot .game-item text{
+  width: 16.66%;
+}
+/*新闻样式*/
+.news-item {
+  padding: 20rpx 30rpx;
+}
+.news-title {
+  font-size: 32rpx;
+}
+.news-item image{
+  width: 220rpx;
+  height: 144rpx;
+  border-radius: 10rpx;
+}
+.news-item image:nth-child(2) {
+  padding: 0 15rpx;
+}
+.news-commentInfo {
+  color: #999;
+}
+/*赛程样式*/
+.schedule-item, .player-item {
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #bebebe;
+  color: #999;
+}
+.schedule-item > view {
+  width: 20%;
+}
+.schedule-item > view:nth-child(2) {
+  width: 60%;
+}
+.schedule-item image{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+}
+.schedule-item image, .schedule-item text {
+  display: block;
+  text-align: center;
+}
+.schedule-content text:nth-child(3) {
+  font-size: 36rpx;
+  color: #000;
+}
+/*资料样式*/
+.swiper-content-item {
+  font-size: 28rpx;
+  color:#333;
+}
+.public-title {
+  width: 100%;
+  background-color: #eee;
+  
+  line-height: 60rpx;
+  padding-left: 20rpx;
+}
+.game-introduced {
+  font-size: 32rpx;
+  border-bottom: 1px dashed #999;
+  color: #333;
+  padding-bottom: 15rpx;
+}
+.game-abstract {
+  padding: 15rpx 20rpx;
+}
+.game-abstract .info-item {
+  width: 50%;
+}
+.game-abstract .info-item text:first-child {
+  color: #999;
+  padding-right: 10rpx;
+}
+.player-list image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.player-header text {
+  /* text-align: center; */
+}
+.player-header text , .player-item > view, .player-item > text{
+  width: 20%;
+}
+.player-header text:nth-child(2) , .player-item > view:nth-child(2), .player-item > text:nth-child(2){
+  width: 40%;
+}
+.player-item {
+  align-items: center;
+  padding: 0;
+}
+.player-item .flex{
+  align-items: center;
+}
+.player-item .flex text {
+  width: 40rpx;
+}
+.items-list text, .honor-list text {
+  display: block;
+  color: #333;
+}
+.flex {
+  display: flex;
+}
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}

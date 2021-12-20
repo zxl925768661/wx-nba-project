@@ -1,0 +1,37 @@
+/**index.wxss**/
+.picker-date {
+  color: #666;
+  padding: 10rpx 0;
+  font-size: 34rpx;
+}
+.schedule-list {
+  font-size: 28rpx;
+}
+.shcedule-date {
+  font-size: 32rpx;
+  color: #666;
+  background-color: #ebf0f5;
+}
+.schedule-item {
+  padding: 10rpx 0;
+  color: #999;
+}
+.schedule-item > view {
+  width: 20%;
+}
+.schedule-item > view:nth-child(2) {
+  width: 60%;
+}
+.schedule-item image{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+}
+.schedule-item image, .schedule-item text {
+  display: block;
+  text-align: center;
+}
+.schedule-content text:nth-child(3) {
+  font-size: 36rpx;
+  color: #000;
+}

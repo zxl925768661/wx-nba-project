@@ -1,0 +1,236 @@
+<!--pages/team_info/team_info.wxml-->
+<wxs module="util">
+  var areaMap = {
+    atlantic: '大西洋',
+    central: '中部',
+    east: '东部',
+    eastsouth: '东南',
+    pacific: '太平洋',
+    west: '西部',
+    westnorth: '西北',
+    westsouth: '西南'
+  }
+  var formatNumber = function(n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+  }
+  var getMouthAndDate = function(time) {
+    var date = getDate(time * 1000);
+    return formatNumber(date.getMonth() + 1) + '.' + formatNumber(date.getDate())
+  };
+  var getHeight = function(x, y) {
+    return x * 60 / y ;
+  }
+   var getRankInfo = function(area) {
+    return areaMap[area];
+  }
+  module.exports = {
+    getMouthAndDate: getMouthAndDate,
+    getHeight: getHeight,
+    getRankInfo: getRankInfo
+  }
+</wxs>
+<view>
+  <view class="team-header flex" style="background-color:{{teamColor}}">
+    <image src="{{baseInfo.baseInfo.logo}}"></image>
+    <view class="head-left">
+      <text class="teamName">{{baseInfo.baseInfo.cnName}}</text>
+      <text>NBA{{util.getRankInfo(baseInfo.rankData.area)}}联盟第{{baseInfo.rankData.serial}}名</text>
+      <text>主教练:{{baseInfo.baseInfo.coach}}</text>
+      <text>主场馆:{{baseInfo.baseInfo.venue}}</text>
+    </view>
+  </view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">数据</view>
+    <view class="swiper-tab-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">新闻</view>
+    <view class="swiper-tab-item {{currentTab==2 ? 'active' : ''}}" data-current="2" bindtap="swichNav">赛程</view>
+    <view class="swiper-tab-item {{currentTab==3 ? 'active' : ''}}" data-current="3" bindtap="swichNav">资料</view>
+  </view>
+  <view current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+    <view class="swiper-content-item dataBox {{currentTab==0 ? 'block' : ''}}">
+      <view wx:for="{{allSeasons}}" wx:key="index" wx:for-item="item">
+        <view class="public-title" bindtap="tabExpand" data-seasonId="{{item.seasonId}}" data-seasonType="{{item.seasonType}}">
+          <text>{{item.seasonDesc}} {{item.seasonCnPhase}}</text>
+        </view>
+        <view class="data-content {{currentSeasonIdType == (item.seasonId + '-' + item.seasonType) ? 'block': 'none'}}">
+          <view class="union-contrast" wx:if="{{gameInfo[item.seasonId + '-' + item.seasonType].statsCompare}}">
+            <view class="team-title"><text>联盟对比</text></view>
+            <view class="contrast-title">
+              <text class="strip team-strip"></text>
+              <text class="strip-name">球员</text>
+              <text class="strip avg-strip"></text>
+              <text class="strip-name">联盟均值</text>
+              <text class="strip max-strip"></text>
+              <text class="strip-name">联盟最高值</text>
+            </view>
+            <view class="flex contrast-rects">
+              <view wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].statsCompare}}" wx:key="index" wx:for-item="item"  class="rect-item">
+                <view class="rects-line flex">
+                  <view class="team-box">
+                    <text>{{item.value}}</text>
+                    <view class="team-strip" style="height: {{util.getHeight(item.value, item.leagueMax)}}px"></view>
+                  </view>
+                  <view class="max-box">
+                    <text>{{item.leagueMax}}</text>
+                    <view class="max-strip"></view>
+                  </view>
+                  <view class="avg-box">
+                    <view class="avg-strip" style="height: {{util.getHeight(item.leagueAvg, item.leagueMax)}}px">
+                      <text>{{item.leagueAvg}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="rects-info">
+                  <text>{{item.type}}</text>
+                  <text>联盟第{{item.serial}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="game-shoot" wx:if="{{gameInfo[item.seasonId + '-' + item.seasonType].playoffs}}">
+            <view class="team-title"><text>季后赛对阵</text></view>
+            <view class="game-titles flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].playoffs.headers}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+            <view class="game-item flex">
+              <block wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].playoffs.list[0]}}" wx:key="index" wx:for-item="item">
+                <text wx:if="{{index == 1}}">{{item.vsTeamName}}</text>
+                <text wx:else>{{item}}</text>
+              </block>
+            </view>
+          </view>
+          <view class="game-shoot" wx:if="{{gameInfo[item.seasonId + '-' + item.seasonType].teamRank}}">
+            <view class="team-title"><text>排行榜</text></view>
+            <view class="game-titles flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].teamRank.heads}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+            <view class="game-item flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].teamRank.list}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+          </view>
+          <view class="team-lastfive" wx:if="{{gameInfo[item.seasonId + '-' + item.seasonType].lastMatches}}">
+            <view class="team-title"><text>最近5场</text></view>
+            <view class="game-titles flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].lastMatches.heads}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+            <view wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].lastMatches.list}}" wx:key="index" wx:for-item="list" class="game-item flex">
+              <text>{{util.getMouthAndDate(list[0])}}</text>
+              <view class="vs-score"><text class="{{list[1].isWin === '0' ? 'green': 'red'}}">{{list[1].selfGoal}}</text>-{{list[1].rivalGoal}}</view>
+              <text>{{list[2]['vsTeamName']}}</text>
+              <block wx:for="{{[3, 4, 5, 6, 7, 8]}}" wx:key="index" wx:for-item="i">
+                <text>{{list[i]}}</text>
+              </block>
+            </view>
+          </view>
+          
+          <view class="game-shoot" wx:if="{{gameInfo[item.seasonId + '-' + item.seasonType].seasonStat}}">
+            <view class="team-title"><text>投篮(场均)</text></view>
+            <view class="game-titles flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].seasonStat.heads}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+            <view class="game-item flex">
+              <text wx:for="{{gameInfo[item.seasonId + '-' + item.seasonType].seasonStat.list}}" wx:key="index" wx:for-item="item">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="swiper-content-item dataBox {{currentTab==1 ? 'block' : ''}}">
+      <scroll-view scroll-y="true" enhanced="true" bindscrolltolower="scrollToLower" style="height: 1000rpx;">
+        <navigator url="/pages/news_info/news_info?newsId={{item.app_id}}" wx:for="{{newsList}}" wx:key="index" wx:for-item="item" class="news-item">
+          <view class="news-title">{{item.title}}</view>
+          <view class="flex news-imgs">
+            <image wx:for="{{item.irs_imgs['295X195']}}" wx:key="index" wx:for-item="item" src="{{item}}"></image>
+          </view>
+          <view class="news-commentInfo">{{item.source}} {{item.comment_num}}评 {{item.update_time}}</view>
+        </navigator>
+      </scroll-view>
+    </view>
+    <view class="swiper-content-item schedulesBox {{currentTab==2 ? 'block' : ''}}">
+      <view class='select-mouth pl-20'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{dateArray}}">
+          <view class="picker icon-rili">
+            请选择年月：{{yearMonthText}}
+          </view>
+        </picker>
+      </view>
+      <view class="schedules-list">
+        <view wx:if="{{scheduleMap[yearMonthText] && scheduleMap[yearMonthText].length}}">
+          <block wx:for="{{scheduleMap[yearMonthText]}}" wx:for-item="item">
+            <navigator url="/pages/live_detail/live_detail?mid={{item.mid}}&competitionId={{competitionId}}">
+              <view class="schedule-item flex">
+                <view class="schedule-left">
+                  <image src="{{item.leftBadge}}"></image>
+                  <text>{{item.leftName}}</text>
+                </view>
+                <view class="schedule-content">
+                  <text>{{item.matchDesc}}</text>
+                  <text>{{item.startTime}}</text>
+                  <text>{{item.leftGoal}}:{{item.rightGoal}}</text>
+                  <text>{{item.ifHasPlayback == '1' ? '回看 ': ''}}{{item.ifHasHighlights == '1' ? '集锦': ''}}</text>
+                </view>
+                <view class="schedule-right">
+                  <image src="{{item.rightBadge}}"></image>
+                  <text>{{item.rightName}}</text>
+                </view>
+              </view>
+            </navigator>            
+          </block>
+          
+        </view>
+        <view wx:else class="no-data">无赛程</view>
+      </view>
+    </view>
+    <view class="swiper-content-item materialBox {{currentTab==3 ? 'block' : ''}}">
+        <view wx:if="{{baseInfo.baseInfo}}" class="basicInfo">
+          <view class="public-title"><text>基本信息</text></view>
+          <view class="game-introduced pl-20 pr-20" wx:if="{{baseInfo.baseInfo.brief}}">
+            {{baseInfo.baseInfo.brief}}
+          </view>
+        </view>
+        <view class="game-abstract pl-20">
+            <view class="flex">
+              <view class="info-item">
+                <text>现任教练:</text>
+                <text>{{baseInfo.baseInfo.coach}}</text>
+              </view>
+              <view class="info-item">
+                <text>城市:</text>
+                <text>{{baseInfo.baseInfo.city}}</text>
+              </view>
+            </view>
+            <view class="flex">
+              <view class="info-item">
+                <text>联盟排名:</text>
+                <text>{{util.getRankInfo(baseInfo.rankData.area)}}-第{{baseInfo.rankData.serial}}名</text>
+              </view>
+              <view class="info-item">
+                <text>场馆:</text>
+                <text>{{baseInfo.baseInfo.venue}}</text>
+              </view>
+            </view>
+          </view>
+        <view class="playersInfo">
+          <view class="public-title"><text>球员阵容</text></view>
+          <view class="player-header flex">
+            <text class="pl-20">号码</text>
+            <text>名称</text>
+            <text>位置</text>
+            <text>薪资(万$)</text>
+          </view>
+          <view class="player-list" wx:if="{{teamPlayers && teamPlayers.length}}">
+            <navigator wx:for="{{teamPlayers}}" wx:key="index" wx:for-item="item" class="player-item flex" url="/pages/player_info/player_info?playerId={{item.playerId}}">
+              <view class="flex pl-20">
+                <text>{{item.jerseyNum}}</text>
+                <image src="{{item.logo}}"></image>
+              </view>
+              <text>{{item.cnName}}</text>
+              <text>{{item.position}}</text>
+              <text>{{item.wage || '-'}}</text>
+            </navigator>
+          </view>
+        </view>
+    </view>
+  </view>
+
+</view>

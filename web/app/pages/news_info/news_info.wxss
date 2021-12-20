@@ -1,0 +1,29 @@
+/* pages/news_info/news_info.wxss */
+@import "../wxParse/wxParse.wxss";
+text,view {
+  box-sizing: border-box
+}
+
+.news_info {
+  padding: 20rpx 30rpx;
+  width: 100%;
+}
+
+.news_info .title {
+  font-size: 36rpx;
+  display: block;
+  border-bottom: 1rpx solid #bebebe;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  font-weight: bold
+}
+.pubtime {
+  font-size: 24rpx;
+  color: #666;
+  padding-top: 3px;
+  font-weight: 400;
+}
+.wxParse {
+  font-size: 28rpx;
+  color: #333;
+}

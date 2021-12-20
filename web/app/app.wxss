@@ -1,0 +1,54 @@
+/**app.wxss**/
+.swiper-tab {
+  width: 100%;
+  border-bottom: 1rpx solid #bebebe;
+  text-align: center;
+  line-height: 80rpx;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.swiper-box {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 100%;
+  float: left;
+}
+.swiper-tab-item {
+  font-size: 30rpx;
+  display: inline-block;
+  color: #777;
+  padding: 0 20rpx;
+}
+.swiper-item {
+  width: 100%;
+  height: 100%;
+  display: none;
+  box-sizing: border-box;
+}
+.swiper-item.active {
+  display: block;
+}
+.on {
+  color: #00aa98;
+}
+.padding-lr-30 {
+  padding: 0 30rpx;
+}
+.pl-20 {
+  padding-left: 20rpx;
+}
+.pr-20 {
+  padding-right: 20rpx;
+}
+.flex {
+  display: flex;
+}
+.no-data {
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+  margin-top: 100rpx;
+
+}

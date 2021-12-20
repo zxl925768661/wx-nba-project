@@ -1,0 +1,197 @@
+<!--pages/live_detail/live_detail.wxml-->
+<wxs module="util">
+  var getStatus = function(time) {
+    return getDate(time) > getDate() ? '未开始' : '已结束';
+  };
+  var getPercent = function(x, y) {
+    return x * 100 / (x * 1 + y * 1) 
+  }
+  module.exports = {
+    getStatus: getStatus,
+    getPercent: getPercent
+  }
+</wxs>
+<view class="swiper-tab">
+  <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">回顾</view>
+  <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">赛况</view>
+  <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">数据</view>
+  <view class="swiper-tab-item {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">热议</view>
+</view>
+<view current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+  <view class="swiper-item scroll_box video-container {{currentTab==0 ? 'active' : ''}}">
+    <block wx:if="{{stats && stats.length}}">
+      <block wx:for="{{stats}}" wx:for-item="stat" wx:for-index="i" wx:key="index">
+        <view class='public-title'>{{stat.text}}</view>
+        <scroll-view wx:if="{{stat.type == 9 || stat.type == 10}}" class="scroll-view_x" scroll-x>
+          <view bindtap="showPopup" id="{{index}}" data-i="{{i}}" class="video-item" wx:for="{{stat.list}}" wx:for-item="item" wx:key="playUrl">
+            <text>{{item.title}}</text>
+            <image src="{{item.pic}}"></image>
+            <view class="tvp_overlay_play">  
+              <view class="tvp_button_play"></view>  
+            </view>
+          </view>
+        </scroll-view>
+        <view wx:elif="{{stat.type == 5}}">
+        <navigator url="/pages/news_info/news_info?newsId={{item.newsAppId}}" class="news-item flex" wx:for="{{stat.newsList}}" wx:for-item="item" wx:key="index">
+            <view class="news-detail">
+              <text class="news-title">{{item.title}}</text>
+              <text class="news-info">{{item.source}} 评论: {{item.commentsNum}}</text>
+            </view>
+            <image src="{{item.imgurl}}"></image>
+          </navigator>
+        </view>
+      </block>
+    </block>
+    <view wx:else class="no-data">暂无数据</view>
+  </view>
+  <view class="swiper-item  {{currentTab==1 ? 'active' : ''}}">
+    <scroll-view wx:if="{{textLiveContent.length}}" scroll-y="true" enhanced="true" bindscrolltolower="scrollToLower" style="height: 1500rpx;">
+      <block wx:for="{{textLiveContent}}" wx:for-item="item" wx:key="index">
+        <view wx:if="{{item.match}}" class="comment-item textlive-item pl-20 flex">
+          <view class="textlive-time pr-20">{{item.quarterTime}}</view>
+          <view class="textlive-info">
+            <view class="flex">
+              <image wx:if="{{item.broadcast && item.broadcast.team.logo}}" src="{{item.broadcast.team.logo}}"></image>
+              <block wx:if="item.plus">
+                <text class="{{item.broadcast.team.id == matchDetail.matchInfo.leftId ? 'red': ''}}">{{item.leftGoal}}</text> : <text class="{{item.broadcast.team.id == matchDetail.matchInfo.rightId ? 'red': ''}}">{{item.rightGoal}}</text>
+              </block>
+            </view>
+            <view>{{item.content}}<text class="red">{{item.plus}}</text></view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <view wx:else class="no-data">暂无数据</view>
+  </view>
+  <view class="swiper-item  {{currentTab==2 ? 'active' : ''}}">
+    <view class="schedule-item flex">
+      <view class="schedule-left">
+        <image src="{{matchStatistics.teamInfo.leftBadge}}"></image>
+        <text>{{matchStatistics.teamInfo.leftName}}</text>
+      </view>
+      <view class="schedule-content">
+        <!--正在直播的未判断-->
+        <text class='live-time'>{{util.getStatus(matchDetail.matchInfo.startTime)}} </text>
+        <text>{{matchDetail.matchInfo.startTime}}</text>
+        <text>{{matchDetail.matchInfo.leftGoal}} : {{matchDetail.matchInfo.rightGoal}}</text>
+      </view>
+      <view class="schedule-right">
+        <image src="{{matchStatistics.teamInfo.rightBadge}}"></image>
+        <text>{{matchStatistics.teamInfo.rightName}}</text>
+      </view>
+    </view>
+    <block wx:if="{{matchStatistics.periodGoals}}">
+      <view class="public-title pl-20">赛况</view>
+      <view class='thead'>
+        <text class="pl-20">球队</text>
+        <text wx:for="{{matchStatistics.periodGoals.head}}" wx:for-item="item" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="team-score flex">
+        <view class='team-image'>
+          <view class="flex">
+            <image src="{{matchStatistics.teamInfo.leftBadge}}"></image>
+            {{matchStatistics.teamInfo.leftName}}
+          </view>
+          <view class="flex">
+            <image src="{{matchStatistics.teamInfo.rightBadge}}"></image>
+            {{matchStatistics.teamInfo.rightName}}
+          </view>
+        </view>
+        <view class='sec_scores flex'>
+          <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="item" class="one-quarter" wx:key="index">
+              <text >{{matchStatistics.periodGoals.rows[0][item] || '0'}}</text>
+              <text >{{matchStatistics.periodGoals.rows[1][item] || '0'}}</text>
+            </view>
+        </view>
+      </view>
+    </block>
+    
+    <block wx:if="{{matchStatistics.maxPlayers}}">
+      <view class="public-title pl-20">本场最佳</view>
+      <view class="max-player flex">
+        <view class="top-player-name flex flex-center">
+          <image src="{{matchStatistics.teamInfo.leftBadge}}"></image>
+          <text>{{matchStatistics.teamInfo.leftName}}</text>
+        </view>
+        <text class="top-player-vs">vs</text>
+        <view class="top-player-name flex flex-center right-side">
+          <image src="{{matchStatistics.teamInfo.rightBadge}}"></image>
+          <text>{{matchStatistics.teamInfo.rightName}}</text>
+        </view>
+      </view>
+      <view class="top-player-list">
+        <view wx:for="{{matchStatistics.maxPlayers}}" wx:for-item="item" wx:key="index" class="player-item flex">
+          <view class="top-player-name flex">
+            <image src="{{item.leftPlayer.icon}}"></image>
+            <view class="flex player-nameInfo">
+              <text>{{item.leftPlayer.jerseyNum}}</text>
+              <text>{{item.leftPlayer.name}}</text>
+            </view>
+          </view>
+          <view class="player-score-info">
+            <text>{{item.leftVal}}</text> {{item.text}} <text>{{item.rightVal}}</text>
+          </view>
+          <view class="top-player-name flex right-side">
+            <view class="flex player-nameInfo">
+              <text>{{item.rightPlayer.jerseyNum}}</text>
+              <text>{{item.rightPlayer.name}}</text>
+            </view>
+            <image src="{{item.rightPlayer.icon}}"></image>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <block wx:for="{{['left', 'right']}}" wx:for-item="name" wx:key="*this">
+      <view class="teamer-name pl-20" wx:if="{{matchStatistics.playerStats[name]}}"> {{matchStatistics.teamInfo[name + 'Name']}}</view>
+      <view class="scroll_box"> 
+        <scroll-view class="scroll-view_x" scroll-x>
+          <view class='player-data-list'>
+            <block wx:for="{{matchStatistics.playerStats[name]}}" wx:for-item="list" wx:key="index">
+                <view wx:if="{{index == 0}}" class='player-data-header'>
+                  <text wx:for="{{list.head}}" wx:for-item="item" wx:key="index"> {{item}}</text>
+                </view>
+                <block wx:else>
+                    <view class="player-data-item {{(index + 1)%2 == 0 ? '' : 'f5f5f5'}}">
+                    <block wx:for="{{list.row}}" wx:for-item="item" wx:key="index">
+                      <block wx:if="{{index >= 1}}">
+                        <navigator wx:if="{{index == 1}}" url="/pages/player_info/player_info?playerId={{list.playerId}}">
+                          <text>{{list.row[0] + '/' + list.row[1]}}</text>
+                        </navigator>
+                        <text wx:else wx:key="index">
+                        {{item}}
+                        </text>
+                      </block>
+                    </block>
+                  </view>
+                </block>
+            </block>
+          </view>
+        </scroll-view>
+      </view>       
+    </block>
+
+  </view>
+  <view class="swiper-item  {{currentTab==3 ? 'active' : ''}}">
+    <view class="public-title pl-20">精彩评论</view>
+    <block wx:if="{{commentsInfo && commentsInfo.commentid && commentsInfo.commentid.length}}">
+      <view wx:for="{{commentsInfo.commentid}}" class="comment-item pl-20" wx:for-item="item" wx:key="index">
+        <view class="flex">
+          <image src="{{item.userinfo.head}}"></image>
+          <view class="comment-userInfo flex">
+            <text>{{item.userinfo.nick}}</text>
+            <text>{{item.timeDifference}}</text>
+          </view>
+        </view>
+        <view class="comment-info">{{item.content}}</view>
+      </view>
+    </block>
+    <view wx:else class="no-data">
+      暂无评论
+    </view>
+  </view>
+</view>
+<popup id='popup' 
+  bind:error="_error"  
+  bind:success="_success">
+</popup>
